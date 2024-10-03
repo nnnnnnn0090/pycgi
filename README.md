@@ -26,8 +26,8 @@ Here’s an example of how you can use **pycgi**:
     
     <!-- Embedded Python code -->
     <?py
-    for i in range(3):
-        print(f"<p>Dynamic message {i+1}</p>")
+      for i in range(3):
+          print(f"<p>Dynamic message {i+1}</p>")
     ?>
     
 </body>
@@ -56,7 +56,7 @@ In the above example, the Python code within `<?py ?>` is executed, and its outp
         <h1>Hello pycgi!</h1>
         
         <?py
-        print("<p>This is Python inside HTML!</p>")
+          print("<p>This is Python inside HTML!</p>")
         ?>
     </body>
     </html>
