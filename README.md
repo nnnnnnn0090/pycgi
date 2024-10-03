@@ -42,7 +42,7 @@ In the above example, the Python code within `<?py ?>` is executed, and its outp
 
 1. Download the latest version of **pycgi** from the [Release page](https://github.com/your-repo/pycgi/releases).
 
-2. Once downloaded, You can run the server by simply double-clicking on pycgi.py in the extracted folder.
+2. Once downloaded, You can run the server by simply double-clicking on pycgi
 
     ```bash
     ./pycgi
