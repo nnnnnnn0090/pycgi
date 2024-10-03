@@ -38,13 +38,21 @@ In the above example, the Python code within `<?py ?>` is executed, and its outp
 
 ## Getting Started
 
-### Requirements
+### 1. Download and Run
 
-- Python 3.x
+1. Download the latest version of **pycgi** from the [Release page](https://github.com/your-repo/pycgi/releases).
 
-### Creating Your First `.pycgi` File
+2. Once downloaded, extract the files and open a command line (Terminal or Command Prompt). Run the following command to start the server:
 
-1. Create a new file in the project directory with the `.pycgi` extension, for example `index.pycgi`:
+    ```bash
+    ./pycgi
+    ```
+
+   When you run this command, a `docs` folder will automatically be created in the same directory. You can place your `.pycgi` files inside this folder.
+
+### 2. Creating Your First `.pycgi` File
+
+1. Inside the `docs` folder, create a new file named `index.pycgi` with the following content:
 
     ```html
     <!DOCTYPE html>
@@ -62,7 +70,7 @@ In the above example, the Python code within `<?py ?>` is executed, and its outp
     </html>
     ```
 
-2. Access it by visiting `http://localhost:8000/index.pycgi` in your web browser.
+2. Open your web browser and visit `http://localhost:8000/index.pycgi` to see your newly created page.
 
 ## How it Works
 
