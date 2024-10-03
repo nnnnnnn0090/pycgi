@@ -7,10 +7,15 @@
 - **Embed Python in HTML**: Use `<?py ?>` tags to embed Python code inside your HTML files.
 - **Dynamic Content Generation**: Generate dynamic web pages by mixing static HTML and Python logic.
 - **Simple and Intuitive**: Just like PHP, no need for complex configurations. Write HTML and Python together in one file.
-  
+- **Request Handling**: Access request headers, query parameters, and POST data easily.
+- **Response Manipulation**: Set response headers and body content directly from your Python code.
+- **Flexible Output**: Use the `echo` function to render content directly to the output stream at any point in your HTML.
+- **Execution Path Access**: Use `_EXECUTE_PATH` to display the execution path of the running **pycgi** instance.
+- **Document Root Access**: Use `_DOCSROOT` to get the document root directory where your `.pycgi` files are located.
+
 ## Example
 
-Here’s an example of how you can use **pycgi**:
+Here’s an example of how you can use **pycgi** to handle request data, set response headers, and use the `echo` function, including displaying the execution path and document root:
 
 ```html
 <!DOCTYPE html>
@@ -26,15 +31,49 @@ Here’s an example of how you can use **pycgi**:
     
     <!-- Embedded Python code -->
     <?py
-      for i in range(3):
-          print(f"<p>Dynamic message {i+1}</p>")
+      # Set a response header
+      _RSP_HEADERS["Content-Type"] = "text/html; charset=utf-8"
+      _RSP_HEADERS["Custom-Header"] = "MyHeaderValue"
+
+      # Display the execution path
+      echo(f"<p>Execution Path: {_EXECUTE_PATH}</p>")
+
+      # Display the document root
+      echo(f"<p>Document Root: {_DOCSROOT}</p>")
+
+      # Use echo to render content
+      echo("<p>This is rendered using echo.</p>")
+
+      # Print request headers
+      for header, value in _REQ_HEADERS.items():
+          echo(f"<p>{header}: {value}</p>")
+      
+      # Print GET query parameter
+      if "name" in _GET:
+          echo(f"<p>Hello, {_GET['name']}!</p>")
+      
+      # Print POST data
+      if _POST_DATA:
+          echo("<p>POST Data:</p><pre>")
+          echo(_POST_DATA)
+          echo("</pre>")
+      
+      # Print JSON POST data
+      if _POST_JSON:
+          echo("<p>JSON POST Data:</p><pre>")
+          echo(_POST_JSON)
+          echo("</pre>")
     ?>
     
 </body>
 </html>
 ```
 
-In the above example, the Python code within `<?py ?>` is executed, and its output is rendered directly in the HTML response.
+In the above example:
+- **Execution Path**: Display the current execution path of the **pycgi** instance using `_EXECUTE_PATH`.
+- **Document Root**: Display the document root directory using `_DOCSROOT`.
+- **Response Headers**: Set response headers using the `_RSP_HEADERS` dictionary.
+- **Dynamic Output**: Use the `echo` function to render HTML content directly to the output stream, allowing you to inject content at any point in your HTML.
 
 ## Getting Started
 
@@ -42,7 +81,7 @@ In the above example, the Python code within `<?py ?>` is executed, and its outp
 
 1. Download the latest version of **pycgi** from the [Release page](https://github.com/nnnnnnn0090/pycgi/releases).
 
-2. Once downloaded, You can run the server by simply double-clicking on pycgi
+2. Once downloaded, you can run the server by simply double-clicking on `pycgi`.
 
     ```bash
     ./pycgi
@@ -64,13 +103,57 @@ In the above example, the Python code within `<?py ?>` is executed, and its outp
         <h1>Hello pycgi!</h1>
         
         <?py
-          print("<p>This is Python inside HTML!</p>")
+          echo("<p>This is Python inside HTML!</p>")
         ?>
     </body>
     </html>
     ```
 
 2. Open your web browser and visit `http://localhost:8000/index.pycgi` to see your newly created page.
+
+## Request Handling
+
+**pycgi** allows you to handle various types of requests seamlessly:
+
+- **Request Headers**: Access headers via the `_REQ_HEADERS` dictionary.
+  
+  ```python
+  echo(_REQ_HEADERS["Header-Name"])
+  ```
+
+- **GET Parameters**: Access GET parameters using the `_GET` dictionary.
+
+  ```python
+  echo(_GET["parameter_name"])
+  ```
+
+- **POST Data**: Access raw POST data through the `_POST_DATA` variable.
+
+  ```python
+  echo(_POST_DATA)
+  ```
+
+- **JSON POST Data**: If you send JSON data in the POST request, access it via the `_POST_JSON` variable.
+
+  ```python
+  echo(_POST_JSON["key_name"])
+  ```
+
+## Response Manipulation
+
+You can modify the HTTP response before it is sent back to the client:
+
+- **Set Response Headers**: Add or modify response headers using the `_RSP_HEADERS` dictionary.
+
+  ```python
+  _RSP_HEADERS["Header-Name"] = "Header Value"
+  ```
+
+- **Set Response Body**: You can define the response body using the `_RSP_BODY` variable. However, using `echo` allows you to output content directly within your HTML structure.
+
+  ```python
+  _RSP_BODY = "<h2>This is the response body.</h2>"
+  ```
 
 ## How it Works
 
