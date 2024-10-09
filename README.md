@@ -12,6 +12,7 @@
 - **Flexible Output**: Use the `echo` function to render content directly to the output stream at any point in your HTML.
 - **Execution Path Access**: Use `_EXECUTE_PATH` to display the execution path of the running **pycgi** instance.
 - **Document Root Access**: Use `_DOCSROOT` to get the document root directory where your `.pycgi` files are located.
+- **Storage API**: Easily store and retrieve key-value pairs using the `Storage` object.
 
 ## Example
 
@@ -63,6 +64,14 @@ Here’s an example of how you can use **pycgi** to handle request data, set res
           echo("<p>JSON POST Data:</p><pre>")
           echo(_POST_JSON)
           echo("</pre>")
+
+      # Storage API Example
+      # Set a value in the storage
+      Storage.setValue("nickname", "pycgi")
+
+      # Retrieve the value from the storage with a default value
+      nickname = Storage.getValue("nickname", "none")
+      echo(f"<p>Stored Nickname: {nickname}</p>")
     ?>
     
 </body>
@@ -70,6 +79,7 @@ Here’s an example of how you can use **pycgi** to handle request data, set res
 ```
 
 In the above example:
+- **Storage API**: Demonstrates how to store and retrieve values using the `Storage` object with `Storage.setValue(key, value)` and `Storage.getValue(key, default)` methods.
 - **Execution Path**: Display the current execution path of the **pycgi** instance using `_EXECUTE_PATH`.
 - **Document Root**: Display the document root directory using `_DOCSROOT`.
 - **Response Headers**: Set response headers using the `_RSP_HEADERS` dictionary.
@@ -110,6 +120,25 @@ In the above example:
     ```
 
 2. Open your web browser and visit `http://localhost:8000/index.pycgi` to see your newly created page.
+
+## Storage API
+
+**pycgi** now includes a simple Storage API that allows you to store and retrieve key-value pairs during the execution of your web application.
+
+- **Store a Value**: You can store a value in the storage by calling `Storage.setValue(key, value)`.
+
+  ```python
+  Storage.setValue("nickname", "pycgi")
+  ```
+
+- **Retrieve a Value**: To retrieve a value from the storage, use `Storage.getValue(key, default)`. If the key is not found, it will return the default value you provide.
+
+  ```python
+  nickname = Storage.getValue("nickname", "none")
+  echo(f"Stored Nickname: {nickname}")
+  ```
+
+This feature is useful for temporarily storing data during the execution of a request, such as user session information or other dynamic content.
 
 ## Request Handling
 
