@@ -183,6 +183,12 @@ You can modify the HTTP response before it is sent back to the client:
   ```python
   _RSP_BODY = "<h2>This is the response body.</h2>"
   ```
+  
+## Options
+```python
+-h, --help   show this help message and exit
+--port PORT  Port to run the server on
+```
 
 ## How it Works
 
