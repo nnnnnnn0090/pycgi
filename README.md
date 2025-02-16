@@ -168,6 +168,21 @@ This feature is useful for temporarily storing data during the execution of a re
   echo(_POST_JSON["key_name"])
   ```
 
+- ****
+  
+  ```python
+  echo(_EXECUTE_PATH)
+  ```
+  ```python
+  echo(_PATH)
+  ```
+  ```python
+  echo(_DOCS_ROOT)
+  ```
+  ```python
+  echo(_LISTEN_PORT)
+  ```
+
 ## Response Manipulation
 
 You can modify the HTTP response before it is sent back to the client:
